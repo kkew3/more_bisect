@@ -28,6 +28,7 @@ Example
 __all__ = [
     'NotFound',
     'any_pos_of_x',
+    'first_pos_of_x',
 ]
 
 
@@ -77,6 +78,30 @@ def any_pos_of_x(x, a=None, lo=None, hi=None, key=None):
             lo = mi + 1
         else:
             hi = mi - 1
+    if key(lo) == x:
+        return lo
+    raise NotFound
+
+
+def first_pos_of_x(x, a=None, lo=None, hi=None, key=None):
+    """
+    Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
+    ``None``) is equal to ``x`` within [``lo``, ``hi``] such that ``i`` is
+    the smallest.
+    :raise NotFound: if such index is not found
+    """
+    lo, hi, key = _validate_args(a, lo, hi, key)
+    if lo > hi:
+        raise NotFound
+    while lo < hi:
+        mi = lo + (hi - lo) // 2
+        mi_value = key(mi)
+        if mi_value < x:
+            lo = mi + 1
+        elif mi_value > x:
+            hi = mi - 1
+        else:
+            hi = mi
     if key(lo) == x:
         return lo
     raise NotFound
