@@ -26,7 +26,6 @@ Example
 
 
 __all__ = [
-    'NotFound',
     'any_pos_of_x',
     'first_pos_of_x',
     'last_pos_of_x',
@@ -41,10 +40,6 @@ def _index_a_mapped(a, f):
     def _pick(i):
         return f(a[i])
     return _pick
-
-
-class NotFound(Exception):
-    pass
 
 
 def _validate_args(a, lo, hi, key):
@@ -64,12 +59,12 @@ def _validate_args(a, lo, hi, key):
 def any_pos_of_x(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
-    ``None``) is equal to ``x`` within range [``lo``, ``hi``].
-    :raise NotFound: if such index is not found
+    ``None``) is equal to ``x`` within range [``lo``, ``hi``]. If no such
+    index is found, returns ``None``.
     """
     lo, hi, key = _validate_args(a, lo, hi, key)
     if lo > hi:
-        raise NotFound
+        return None
     while lo < hi:
         mi = lo + (hi - lo) // 2
         mi_value = key(mi)
@@ -81,19 +76,18 @@ def any_pos_of_x(x, a=None, lo=None, hi=None, key=None):
             hi = mi - 1
     if key(lo) == x:
         return lo
-    raise NotFound
+    return None
 
 
 def first_pos_of_x(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
     ``None``) is equal to ``x`` within [``lo``, ``hi``] such that ``i`` is
-    the smallest.
-    :raise NotFound: if such index is not found
+    the smallest. If no such index is found, returns ``None``.
     """
     lo, hi, key = _validate_args(a, lo, hi, key)
     if lo > hi:
-        raise NotFound
+        return None
     while lo < hi:
         mi = lo + (hi - lo) // 2
         mi_value = key(mi)
@@ -105,19 +99,18 @@ def first_pos_of_x(x, a=None, lo=None, hi=None, key=None):
             hi = mi
     if key(lo) == x:
         return lo
-    raise NotFound
+    return None
 
 
 def last_pos_of_x(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
     ``None``) is equal to ``x`` within [``lo``, ``hi``] such that ``i`` is
-    the largest.
-    :raise NotFound: if such index is not found
+    the largest. If no such index is found, returns ``None``.
     """
     lo, hi, key = _validate_args(a, lo, hi, key)
     if lo > hi:
-        raise NotFound
+        return None
     while lo < hi:
         mi = lo + (hi - lo + 1) // 2
         mi_value = key(mi)
@@ -129,4 +122,4 @@ def last_pos_of_x(x, a=None, lo=None, hi=None, key=None):
             lo = mi
     if key(lo) == x:
         return lo
-    raise NotFound
+    return None
