@@ -29,6 +29,7 @@ __all__ = [
     'NotFound',
     'any_pos_of_x',
     'first_pos_of_x',
+    'last_pos_of_x',
 ]
 
 
@@ -102,6 +103,30 @@ def first_pos_of_x(x, a=None, lo=None, hi=None, key=None):
             hi = mi - 1
         else:
             hi = mi
+    if key(lo) == x:
+        return lo
+    raise NotFound
+
+
+def last_pos_of_x(x, a=None, lo=None, hi=None, key=None):
+    """
+    Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
+    ``None``) is equal to ``x`` within [``lo``, ``hi``] such that ``i`` is
+    the largest.
+    :raise NotFound: if such index is not found
+    """
+    lo, hi, key = _validate_args(a, lo, hi, key)
+    if lo > hi:
+        raise NotFound
+    while lo < hi:
+        mi = lo + (hi - lo + 1) // 2
+        mi_value = key(mi)
+        if mi_value < x:
+            lo = mi + 1
+        elif mi_value > x:
+            hi = mi - 1
+        else:
+            lo = mi
     if key(lo) == x:
         return lo
     raise NotFound

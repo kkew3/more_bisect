@@ -71,3 +71,22 @@ def test_first_pos_of_x():
     a = [1, 4, 5, 6, 7, 8, 9, 10]
     with pytest.raises(more_bisect.NotFound):
         more_bisect.first_pos_of_x(3, a)
+
+
+
+def test_last_pos_of_x():
+    a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    pos = more_bisect.last_pos_of_x(3, a)
+    assert pos == 4
+    pos = more_bisect.last_pos_of_x(-3, list(reversed(a)), key=lambda x: -x)
+    assert pos == 10
+    a = [2, 3]
+    assert more_bisect.last_pos_of_x(3, a) == 1
+    a = [3, 4]
+    assert more_bisect.last_pos_of_x(3, a) == 0
+    a = []
+    with pytest.raises(more_bisect.NotFound):
+        more_bisect.last_pos_of_x(3, a)
+    a = [1, 4, 5, 6, 7, 8, 9, 10]
+    with pytest.raises(more_bisect.NotFound):
+        more_bisect.last_pos_of_x(3, a)
