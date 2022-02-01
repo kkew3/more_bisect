@@ -1,3 +1,55 @@
 import pytest
 
 import more_bisect
+from more_bisect.more_bisect import _validate_args
+
+
+def test__validate_args():
+    lo, hi, key = _validate_args([1, 2], None, None, None)
+    assert lo == 0
+    assert hi == 1
+    assert key(0) == 1 and key(1) == 2
+    with pytest.raises(IndexError):
+        key(2)
+
+    lo, hi, key = _validate_args([('a', 1), ('a', 2)], None, 1,
+                                 key=lambda x: x[1])
+    assert lo == 0
+    assert hi == 1
+    assert key(0) == 1 and key(1) == 2
+    with pytest.raises(IndexError):
+        key(2)
+
+    a = [1, 2]
+    lo, hi, key = _validate_args(None, 0, 1, lambda i: a[i])
+    assert lo == 0
+    assert hi == 1
+    assert key(0) == 1 and key(1) == 2
+    with pytest.raises(IndexError):
+        key(2)
+
+    a = [('a', 1), ('a', 2)]
+    lo, hi, key = _validate_args(None, 0, 1, lambda i: a[i][1])
+    assert lo == 0
+    assert hi == 1
+    assert key(0) == 1 and key(1) == 2
+    with pytest.raises(IndexError):
+        key(2)
+
+
+def test_any_pos_of_x():
+    a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    pos = more_bisect.any_pos_of_x(3, a)
+    assert 1 <= pos <= 4
+    pos = more_bisect.any_pos_of_x(-3, list(reversed(a)), key=lambda x: -x)
+    assert 7 <= pos <= 10
+    a = [2, 3]
+    assert more_bisect.any_pos_of_x(3, a) == 1
+    a = [3, 4]
+    assert more_bisect.any_pos_of_x(3, a) == 0
+    a = []
+    with pytest.raises(more_bisect.NotFound):
+        more_bisect.any_pos_of_x(3, a)
+    a = [1, 4, 5, 6, 7, 8, 9, 10]
+    with pytest.raises(more_bisect.NotFound):
+        more_bisect.any_pos_of_x(3, a)
