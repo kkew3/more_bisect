@@ -32,13 +32,13 @@ __all__ = [
 ]
 
 
-def _identity_map(x):
-    return x
-
-
 def _index_a_mapped(a, f):
-    def _pick(i):
-        return f(a[i])
+    if f is None:
+        def _pick(i):
+            return a[i]
+    else:
+        def _pick(i):
+            return f(a[i])
     return _pick
 
 
@@ -52,7 +52,7 @@ def _validate_args(a, lo, hi, key):
             lo = 0
         if hi is None:
             hi = len(a) - 1
-        key = _index_a_mapped(a, key or _identity_map)
+        key = _index_a_mapped(a, key)
     return lo, hi, key
 
 
