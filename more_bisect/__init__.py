@@ -5,4 +5,5 @@ from more_bisect.more_bisect import (
     last_pos_less_than,
     first_pos_greater_than,
     bisect_left,
+    bisect_right,
 )

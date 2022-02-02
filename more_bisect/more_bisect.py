@@ -184,3 +184,21 @@ def bisect_left(x, a=None, lo=None, hi=None, key=None):
         else:
             hi = mi
     return lo
+
+
+def bisect_right(x, a=None, lo=None, hi=None, key=None):
+    """
+    Identical to ``bisect.bisect_right``, except that ``lo`` and ``hi`` define
+    an inclusive range (see module __doc__ for detail).
+    """
+    lo, hi, key = _validate_args(a, lo, hi, key)
+    if lo <= hi and x >= key(hi):
+        return hi + 1
+    while lo < hi:
+        mi = lo + (hi - lo) // 2
+        mi_value = key(mi)
+        if mi_value > x:
+            hi = mi
+        else:
+            lo = mi + 1
+    return lo
