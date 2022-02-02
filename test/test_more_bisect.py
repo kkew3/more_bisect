@@ -103,6 +103,21 @@ def test_last_pos_lt():
     assert more_bisect.last_pos_lt(3, a) == 3
 
 
+def test_last_pos_le():
+    a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.last_pos_le(3, a) == 4
+    a = [3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.last_pos_le(3, a) == 3
+    a = [4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.last_pos_le(3, a) is None
+    a = [2, 3]
+    assert more_bisect.last_pos_le(3, a) == 1
+    a = [3, 4]
+    assert more_bisect.last_pos_le(3, a) == 0
+    a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.last_pos_le(3, a) == 7
+
+
 def test_first_pos_gt():
     a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.first_pos_gt(3, a) == 5

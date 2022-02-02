@@ -30,6 +30,7 @@ __all__ = [
     'first_pos_eq',
     'last_pos_eq',
     'last_pos_lt',
+    'last_pos_le',
     'first_pos_gt',
     'bisect_left',
     'bisect_right',
@@ -151,6 +152,26 @@ def last_pos_lt(x, a=None, lo=None, hi=None, key=None):
         return lo
     return None
 
+
+def last_pos_le(x, a=None, lo=None, hi=None, key=None):
+    """
+    Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
+    ``None``) is less than or equal to ``x`` within [``lo``, ``hi``], and that
+    ``i`` is the largest. If no such index is found, returns ``None``.
+    """
+    lo, hi, key = _validate_args(a, lo, hi, key)
+    if lo > hi:
+        return None
+    while lo < hi:
+        mi = lo + (hi - lo + 1) // 2
+        mi_value = key(mi)
+        if mi_value <= x:
+            lo = mi
+        else:
+            hi = mi - 1
+    if key(lo) <= x:
+        return lo
+    return None
 
 
 def first_pos_gt(x, a=None, lo=None, hi=None, key=None):
