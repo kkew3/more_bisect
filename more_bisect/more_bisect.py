@@ -166,3 +166,21 @@ def first_pos_greater_than(x, a=None, lo=None, hi=None, key=None):
     if key(lo) > x:
         return lo
     return None
+
+
+def bisect_left(x, a=None, lo=None, hi=None, key=None):
+    """
+    Identical to ``bisect.bisect_left``, except that ``lo`` and ``hi`` define
+    an inclusive range (see module __doc__ for detail).
+    """
+    lo, hi, key = _validate_args(a, lo, hi, key)
+    if lo <= hi and x > key(hi):
+        return hi + 1
+    while lo < hi:
+        mi = lo + (hi - lo) // 2
+        mi_value = key(mi)
+        if mi_value < x:
+            lo = mi + 1
+        else:
+            hi = mi
+    return lo
