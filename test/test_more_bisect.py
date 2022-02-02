@@ -131,6 +131,21 @@ def test_first_pos_gt():
     assert more_bisect.first_pos_gt(3, a) == 8
 
 
+def test_first_pos_ge():
+    a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.first_pos_ge(3, a) == 1
+    a = [1, 3, 3, 3, 3]
+    assert more_bisect.first_pos_ge(3, a) == 1
+    a = [1]
+    assert more_bisect.first_pos_ge(3, a) is None
+    a = [2, 3]
+    assert more_bisect.first_pos_ge(3, a) == 1
+    a = [3, 4]
+    assert more_bisect.first_pos_ge(3, a) == 0
+    a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.first_pos_ge(3, a) == 4
+
+
 def test_bisect_left():
     a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.bisect_left(3, a) == 1
