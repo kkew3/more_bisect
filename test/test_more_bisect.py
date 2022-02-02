@@ -37,11 +37,15 @@ def test__validate_args():
         key(2)
 
 
+def revlst(x):
+    return list(reversed(x))
+
+
 def test_any_pos_of_x():
     a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
     pos = more_bisect.any_pos_of_x(3, a)
     assert 1 <= pos <= 4
-    pos = more_bisect.any_pos_of_x(-3, list(reversed(a)), key=lambda x: -x)
+    pos = more_bisect.any_pos_of_x(-3, revlst(a), key=lambda x: -x)
     assert 7 <= pos <= 10
     a = [2, 3]
     assert more_bisect.any_pos_of_x(3, a) == 1
@@ -57,7 +61,7 @@ def test_first_pos_of_x():
     a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
     pos = more_bisect.first_pos_of_x(3, a)
     assert pos == 1
-    pos = more_bisect.first_pos_of_x(-3, list(reversed(a)), key=lambda x: -x)
+    pos = more_bisect.first_pos_of_x(-3, revlst(a), key=lambda x: -x)
     assert pos == 7
     a = [2, 3]
     assert more_bisect.first_pos_of_x(3, a) == 1
@@ -74,7 +78,7 @@ def test_last_pos_of_x():
     a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
     pos = more_bisect.last_pos_of_x(3, a)
     assert pos == 4
-    pos = more_bisect.last_pos_of_x(-3, list(reversed(a)), key=lambda x: -x)
+    pos = more_bisect.last_pos_of_x(-3, revlst(a), key=lambda x: -x)
     assert pos == 10
     a = [2, 3]
     assert more_bisect.last_pos_of_x(3, a) == 1
@@ -115,7 +119,7 @@ def test_first_pos_greater_than():
 def test_bisect_left():
     a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.bisect_left(3, a) == 1
-    pos = more_bisect.bisect_left(-3, list(reversed(a)), key=lambda x: -x)
+    pos = more_bisect.bisect_left(-3, revlst(a), key=lambda x: -x)
     assert pos == 7
     a = [2, 3]
     assert more_bisect.bisect_left(3, a) == 1
@@ -126,7 +130,7 @@ def test_bisect_left():
     assert more_bisect.bisect_left(3, a) == 0
     a = [1, 2, 2, 2, 4, 4, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.bisect_left(3, a) == 4
-    pos = more_bisect.bisect_left(-3, list(reversed(a)), key=lambda x: -x)
+    pos = more_bisect.bisect_left(-3, revlst(a), key=lambda x: -x)
     assert pos == 9
     a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.bisect_left(3, a) == 4
@@ -135,7 +139,7 @@ def test_bisect_left():
 def test_bisect_right():
     a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.bisect_right(3, a) == 5
-    pos = more_bisect.bisect_right(-3, list(reversed(a)), key=lambda x: -x)
+    pos = more_bisect.bisect_right(-3, revlst(a), key=lambda x: -x)
     assert pos == 11
     a = [2, 3]
     assert more_bisect.bisect_right(2, a) == 1
@@ -147,7 +151,7 @@ def test_bisect_right():
     assert more_bisect.bisect_right(3, a) == 0
     a = [1, 2, 2, 2, 4, 4, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.bisect_right(3, a) == 4
-    pos = more_bisect.bisect_right(-3, list(reversed(a)), key=lambda x: -x)
+    pos = more_bisect.bisect_right(-3, revlst(a), key=lambda x: -x)
     assert pos == 9
     a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.bisect_right(3, a) == 8
