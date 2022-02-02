@@ -26,9 +26,9 @@ Example
 
 
 __all__ = [
-    'any_pos_of_x',
-    'first_pos_of_x',
-    'last_pos_of_x',
+    'any_pos_eq',
+    'first_pos_eq',
+    'last_pos_eq',
 ]
 
 
@@ -56,7 +56,7 @@ def _validate_args(a, lo, hi, key):
     return lo, hi, key
 
 
-def any_pos_of_x(x, a=None, lo=None, hi=None, key=None):
+def any_pos_eq(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
     ``None``) is equal to ``x`` within range [``lo``, ``hi``]. If no such
@@ -79,7 +79,7 @@ def any_pos_of_x(x, a=None, lo=None, hi=None, key=None):
     return None
 
 
-def first_pos_of_x(x, a=None, lo=None, hi=None, key=None):
+def first_pos_eq(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
     ``None``) is equal to ``x`` within [``lo``, ``hi``], and that ``i`` is
@@ -102,7 +102,7 @@ def first_pos_of_x(x, a=None, lo=None, hi=None, key=None):
     return None
 
 
-def last_pos_of_x(x, a=None, lo=None, hi=None, key=None):
+def last_pos_eq(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
     ``None``) is equal to ``x`` within [``lo``, ``hi``], and that ``i`` is
@@ -125,7 +125,7 @@ def last_pos_of_x(x, a=None, lo=None, hi=None, key=None):
     return None
 
 
-def last_pos_less_than(x, a=None, lo=None, hi=None, key=None):
+def last_pos_lt(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
     ``None``) is less than ``x`` within [``lo``, ``hi``], and that ``i`` is
@@ -147,7 +147,7 @@ def last_pos_less_than(x, a=None, lo=None, hi=None, key=None):
 
 
 
-def first_pos_greater_than(x, a=None, lo=None, hi=None, key=None):
+def first_pos_gt(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
     ``None``) is greater than ``x`` within [``lo``, ``hi``], and that ``i`` is
@@ -214,7 +214,7 @@ def last_closest_to(x, a=None, lo=None, hi=None, key=None):
     lo, hi, key = _validate_args(a, lo, hi, key)
     if lo > hi:
         return None
-    i = first_pos_greater_than(x, None, lo, hi, key)
+    i = first_pos_gt(x, None, lo, hi, key)
     if i is None:
         return hi
     if i == lo:
@@ -234,7 +234,7 @@ def first_closest_to(x, a=None, lo=None, hi=None, key=None):
     lo, hi, key = _validate_args(a, lo, hi, key)
     if lo > hi:
         return None
-    i = last_pos_less_than(x, None, lo, hi, key)
+    i = last_pos_lt(x, None, lo, hi, key)
     if i is None:
         return lo
     if i == hi:
