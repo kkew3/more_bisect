@@ -144,3 +144,25 @@ def last_pos_less_than(x, a=None, lo=None, hi=None, key=None):
     if key(lo) < x:
         return lo
     return None
+
+
+
+def first_pos_greater_than(x, a=None, lo=None, hi=None, key=None):
+    """
+    Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
+    ``None``) is greater than ``x`` within [``lo``, ``hi``], and that ``i`` is
+    the smallest. If no such index is found, returns ``None``.
+    """
+    lo, hi, key = _validate_args(a, lo, hi, key)
+    if lo > hi:
+        return None
+    while lo < hi:
+        mi = lo + (hi - lo) // 2
+        mi_value = key(mi)
+        if mi_value <= x:
+            lo = mi + 1
+        else:
+            hi = mi
+    if key(lo) > x:
+        return lo
+    return None

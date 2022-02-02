@@ -97,3 +97,16 @@ def test_last_pos_less_than():
     assert more_bisect.last_pos_less_than(3, a) is None
     a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.last_pos_less_than(3, a) == 3
+
+
+def test_first_pos_greater_than():
+    a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.first_pos_greater_than(3, a) == 5
+    a = [1, 3, 3, 3, 3]
+    assert more_bisect.first_pos_greater_than(3, a) is None
+    a = [2, 3]
+    assert more_bisect.first_pos_greater_than(3, a) is None
+    a = [3, 4]
+    assert more_bisect.first_pos_greater_than(3, a) == 1
+    a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.first_pos_greater_than(3, a) == 8

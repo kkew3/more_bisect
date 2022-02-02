@@ -3,4 +3,5 @@ from more_bisect.more_bisect import (
     first_pos_of_x,
     last_pos_of_x,
     last_pos_less_than,
+    first_pos_greater_than,
 )
