@@ -7,4 +7,5 @@ from more_bisect.more_bisect import (
     bisect_left,
     bisect_right,
     last_closest_to,
+    first_closest_to,
 )

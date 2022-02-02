@@ -178,3 +178,26 @@ def test_last_closest_to():
     assert more_bisect.last_closest_to(1, a) == 5
     pos = more_bisect.last_closest_to(-1, revlst(a), key=lambda x: -x)
     assert pos == 4
+
+
+def test_first_closest_to():
+    a = [2, 3, 4]
+    assert more_bisect.first_closest_to(1, a) == 0
+    pos = more_bisect.first_closest_to(-1, revlst(a), key=lambda x: -x)
+    assert pos == 2
+    a = [-2, -1, 0]
+    assert more_bisect.first_closest_to(1, a) == 2
+    pos = more_bisect.first_closest_to(-1, revlst(a), key=lambda x: -x)
+    assert pos == 0
+    a = [-2, -1, 0, 1, 3, 4]
+    assert more_bisect.first_closest_to(1, a) == 3
+    pos = more_bisect.first_closest_to(-1, revlst(a), key=lambda x: -x)
+    assert pos == 2
+    a = [-2, -1, 0, 3, 4, 5]
+    assert more_bisect.first_closest_to(1, a) == 2
+    pos = more_bisect.first_closest_to(-1, revlst(a), key=lambda x: -x)
+    assert pos == 3
+    a = [-2, -1, 0, 1, 1, 1, 3, 4]
+    assert more_bisect.first_closest_to(1, a) == 3
+    pos = more_bisect.first_closest_to(-1, revlst(a), key=lambda x: -x)
+    assert pos == 2

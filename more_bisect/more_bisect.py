@@ -222,3 +222,23 @@ def last_closest_to(x, a=None, lo=None, hi=None, key=None):
     if abs(key(i - 1) - x) < abs(key(i) - x):
         return i - 1
     return i
+
+
+def first_closest_to(x, a=None, lo=None, hi=None, key=None):
+    """
+    Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
+    ``None``) is the closest to ``x`` within [``lo``, ``hi``], and that ``i``
+    is the smallest. If the range defined by ``lo`` and ``hi`` is empty,
+    returns ``None``.
+    """
+    lo, hi, key = _validate_args(a, lo, hi, key)
+    if lo > hi:
+        return None
+    i = last_pos_less_than(x, None, lo, hi, key)
+    if i is None:
+        return lo
+    if i == hi:
+        return hi
+    if abs(key(i + 1) - x) < abs(key(i) - x):
+        return i + 1
+    return i
