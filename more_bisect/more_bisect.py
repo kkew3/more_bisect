@@ -82,7 +82,7 @@ def any_pos_of_x(x, a=None, lo=None, hi=None, key=None):
 def first_pos_of_x(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
-    ``None``) is equal to ``x`` within [``lo``, ``hi``] such that ``i`` is
+    ``None``) is equal to ``x`` within [``lo``, ``hi``], and that ``i`` is
     the smallest. If no such index is found, returns ``None``.
     """
     lo, hi, key = _validate_args(a, lo, hi, key)
@@ -105,7 +105,7 @@ def first_pos_of_x(x, a=None, lo=None, hi=None, key=None):
 def last_pos_of_x(x, a=None, lo=None, hi=None, key=None):
     """
     Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
-    ``None``) is equal to ``x`` within [``lo``, ``hi``] such that ``i`` is
+    ``None``) is equal to ``x`` within [``lo``, ``hi``], and that ``i`` is
     the largest. If no such index is found, returns ``None``.
     """
     lo, hi, key = _validate_args(a, lo, hi, key)
