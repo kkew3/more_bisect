@@ -84,3 +84,16 @@ def test_last_pos_of_x():
     assert more_bisect.last_pos_of_x(3, a) is None
     a = [1, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.last_pos_of_x(3, a) is None
+
+
+def test_last_pos_less_than():
+    a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.last_pos_less_than(3, a) == 0
+    a = [3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.last_pos_less_than(3, a) is None
+    a = [2, 3]
+    assert more_bisect.last_pos_less_than(3, a) == 0
+    a = [3, 4]
+    assert more_bisect.last_pos_less_than(3, a) is None
+    a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.last_pos_less_than(3, a) == 3
