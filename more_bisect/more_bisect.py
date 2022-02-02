@@ -202,3 +202,23 @@ def bisect_right(x, a=None, lo=None, hi=None, key=None):
         else:
             lo = mi + 1
     return lo
+
+
+def last_closest_to(x, a=None, lo=None, hi=None, key=None):
+    """
+    Returns the index ``i`` such that ``a[i]`` (or ``key(i)`` if ``a`` is
+    ``None``) is the closest to ``x`` within [``lo``, ``hi``], and that ``i``
+    is the largest. If the range defined by ``lo`` and ``hi`` is empty,
+    returns ``None``.
+    """
+    lo, hi, key = _validate_args(a, lo, hi, key)
+    if lo > hi:
+        return None
+    i = first_pos_greater_than(x, None, lo, hi, key)
+    if i is None:
+        return hi
+    if i == lo:
+        return lo
+    if abs(key(i - 1) - x) < abs(key(i) - x):
+        return i - 1
+    return i

@@ -6,4 +6,5 @@ from more_bisect.more_bisect import (
     first_pos_greater_than,
     bisect_left,
     bisect_right,
+    last_closest_to,
 )
