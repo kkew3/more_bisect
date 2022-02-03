@@ -1,7 +1,15 @@
+# develop
 /rt/
 .idea/
 
+# pytest
 __pycache__/
 .pytest_cache/
 
+# build
+/build/
+/dist/
+/more_bisect.egg-info/
+
+# vim
 *.swp
