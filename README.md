@@ -26,6 +26,13 @@ All functions are of the same signature:
   This way, when `a` is `None`, not all elements of the *fake* array need to be given before binary search 
 
 
+## Installation
+
+	pip install more_bisect
+
+View the package at [PyPI](https://pypi.org/project/more-bisect/0.1.0/).
+
+
 ## Examples
 
 1. Invoke `first_pos_eq` with an array:
