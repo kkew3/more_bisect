@@ -57,6 +57,12 @@ def test_first_pos_eq():
     assert more_bisect.first_pos_eq(3, a) is None
 
 
+def test_first_pos_eq_called_with_fakearray():
+    a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    pos = more_bisect.first_pos_eq(3, lo=0, hi=len(a), key=lambda i: a[i])
+    assert pos == 1
+
+
 def test_last_pos_eq():
     a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
     pos = more_bisect.last_pos_eq(3, a)
@@ -71,6 +77,12 @@ def test_last_pos_eq():
     assert more_bisect.last_pos_eq(3, a) is None
     a = [1, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.last_pos_eq(3, a) is None
+
+
+def test_last_pos_eq_called_with_fakearray():
+    a = [1, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+    pos = more_bisect.last_pos_eq(3, lo=0, hi=len(a), key=lambda i: a[i])
+    assert pos == 4
 
 
 def test_last_pos_lt():
@@ -99,6 +111,11 @@ def test_last_pos_le():
     assert more_bisect.last_pos_le(3, a) == 0
     a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.last_pos_le(3, a) == 7
+
+
+def test_last_pos_le_called_with_fakearray():
+    a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.last_pos_le(3, lo=0, hi=len(a), key=lambda i: a[i]) == 7
 
 
 def test_first_pos_gt():
@@ -147,6 +164,11 @@ def test_bisect_left():
     assert pos == 9
     a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
     assert more_bisect.bisect_left(3, a) == 4
+
+
+def test_bisect_left_called_with_fakearray():
+    a = [1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10]
+    assert more_bisect.bisect_left(3, lo=0, hi=len(a), key=lambda i: a[i]) == 4
 
 
 def test_bisect_right():
