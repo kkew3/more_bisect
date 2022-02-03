@@ -1,5 +1,4 @@
 from more_bisect.more_bisect import (
-    any_pos_eq,
     first_pos_eq,
     last_pos_eq,
     last_pos_lt,
