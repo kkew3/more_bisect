@@ -11,7 +11,7 @@ setup(
                  'enables flexible comparisons.'),
     long_description=readme,
     long_description_content_type='text/markdown',
-    version='0.1.0',
+    version='0.1.1',
     license='MIT',
     classifiers=[
         'License :: OSI Approved :: MIT License',
@@ -22,5 +22,6 @@ setup(
     keywords='bisect',
     author='Kaiwen Wu',
     author_email='kps6326@hotmail.com',
-    packages=['more_bisect'],
+    package_dir={'': 'src'},
+    py_modules=['more_bisect'],
 )

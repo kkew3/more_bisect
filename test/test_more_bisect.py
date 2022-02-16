@@ -1,18 +1,17 @@
 import pytest
 
 import more_bisect
-from more_bisect.more_bisect import _validate_args
 
 
 def test__validate_args():
-    a, lo, hi = _validate_args([1, 2], None, None, None)
+    a, lo, hi = more_bisect._validate_args([1, 2], None, None, None)
     assert lo == 0
     assert hi == 2
     assert a[0] == 1 and a[1] == 2
     with pytest.raises(IndexError):
         _ = a[2]
 
-    a, lo, hi = _validate_args([('a', 1), ('a', 2)], None, 1,
+    a, lo, hi = more_bisect._validate_args([('a', 1), ('a', 2)], None, 1,
                                key=lambda x: x[1])
     assert lo == 0
     assert hi == 1
@@ -21,7 +20,7 @@ def test__validate_args():
         _ = a[2]
 
     a = [1, 2]
-    a_, lo, hi = _validate_args(None, 0, 1, lambda i: a[i])
+    a_, lo, hi = more_bisect._validate_args(None, 0, 1, lambda i: a[i])
     assert lo == 0
     assert hi == 1
     assert a_[0] == 1 and a_[1] == 2
@@ -29,7 +28,7 @@ def test__validate_args():
         _ = a_[2]
 
     a = [('a', 1), ('a', 2)]
-    a_, lo, hi = _validate_args(None, 0, 1, lambda i: a[i][1])
+    a_, lo, hi = more_bisect._validate_args(None, 0, 1, lambda i: a[i][1])
     assert lo == 0
     assert hi == 1
     assert a_[0] == 1 and a_[1] == 2
